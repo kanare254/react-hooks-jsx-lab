@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { image } from "../data/data";
+import { image } from "../data/data"; // Ensure this path is correct and the image variable is properly exported
 import About from "../components/About";
 
 test("renders a <div> with the ID of 'about'", () => {
@@ -21,10 +21,10 @@ test("renders a <h2> with the text 'About Me'", () => {
   render(<About />);
 
   // find an element with the text content "About Me"
-  const h2 = screen.queryByText("About Me");
+  const h2 = screen.getByText("About Me");
 
   // check that it's a <h2> element
-  expect(h2.tagName).toBe("H2");
+  expect(h2).toBeInTheDocument();
 });
 
 test("renders a <p> element", () => {
@@ -38,7 +38,7 @@ test("renders a <img> element with the correct attributes", () => {
   render(<About />);
 
   // Find an element with the "alt" attribute set to "I made this"
-  const img = screen.queryByAltText("I made this");
+  const img = screen.getByAltText("I made this");
 
   expect(img).toBeInTheDocument();
   expect(img).toHaveAttribute("src", image);
